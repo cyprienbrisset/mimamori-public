@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mimamori 見守り</title>
+<meta name="description" content="Vos caméras Xiaomi C200 sur le Meta Portal, en local : mosaïque, plein écran HD avec le son.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #14110E; --surface: #1E1A16; --raised: #2A231C; --line: #2E2822;
+    --cream: #F3E9DA; --muted: #A89A88; --faint: #6E6255; --amber: #E8A54B;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--night); color: var(--cream); font-family: 'Zen Maru Gothic', system-ui, sans-serif; line-height: 1.6; }
+  a { color: var(--amber); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 72px 0 40px; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand h1 { margin: 0; font-size: clamp(40px, 7vw, 64px); line-height: 1.1; }
+  .brand .jp { color: var(--muted); font-size: 24px; }
+  .lead { font-size: clamp(19px, 2.4vw, 24px); color: var(--cream); max-width: 760px; margin: 24px 0 8px; }
+  .sub { color: var(--muted); max-width: 760px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; border-radius: 28px; text-decoration: none; font-weight: 700; }
+  .btn.primary { background: var(--amber); color: var(--night); box-shadow: 0 0 40px rgba(232,165,75,.35); }
+  .btn.ghost { border: 1px solid var(--line); color: var(--cream); background: var(--surface); }
+
+  /* Mosaic illustration, drawn in CSS: a stand-in, not a capture. */
+  .device { margin: 48px 0 16px; padding: 22px; border-radius: 32px; background: #0B0A08; border: 1px solid var(--line); }
+  .screen { aspect-ratio: 16 / 9; border-radius: 20px; background: var(--night); padding: 3%; display: flex; flex-direction: column; gap: 3%; }
+  .bar { display: flex; align-items: center; gap: 2%; font-size: clamp(10px, 1.6vw, 18px); }
+  .bar b { font-size: 1.4em; }
+  .bar .sp { flex: 1; }
+  .pill { padding: .3em 1em; border-radius: 2em; background: var(--surface); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+  .grid { flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3%; min-height: 0; }
+  .tile { position: relative; border-radius: 14px; border: 1px solid var(--line);
+    background: repeating-linear-gradient(0deg, rgba(243,233,218,.025) 0 2px, transparent 2px 6px), #231F1B; }
+  .tile.lit { border: 2px solid var(--amber); box-shadow: 0 0 36px rgba(232,165,75,.35); }
+  .tile span { position: absolute; left: 4%; top: 7%; padding: .25em .9em; border-radius: 2em; background: rgba(20,17,14,.8); font-size: clamp(9px, 1.4vw, 16px); }
+  .tile span::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: var(--amber); margin-right: .5em; vertical-align: middle; }
+  .tile.off span::before { background: var(--faint); }
+  .caption { color: var(--faint); font-size: 14px; text-align: center; }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(28px, 4vw, 38px); margin: 0 0 24px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .card { padding: 26px; border-radius: 24px; background: var(--surface); border: 1px solid var(--line); }
+  .card h3 { margin: 0 0 8px; font-size: 21px; color: var(--amber); }
+  .card p { margin: 0; color: var(--muted); }
+  ol, ul { padding-left: 1.2em; }
+  li { margin: 6px 0; }
+  code { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .1em .45em; font-size: .92em; }
+  footer { padding: 40px 0 64px; color: var(--faint); font-size: 15px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#E8A54B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v2"/><path d="M7 7c0-1.1.9-2 2-2h6a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z" fill="#3A2A16"/><path d="M7 10.5h10M7 13.5h10"/><path d="M10 18v2h4v-2"/></svg>
+      <h1>Mimamori</h1><span class="jp">見守り</span>
+    </div>
+    <p class="lead">Vos caméras Xiaomi C200 sur le Meta Portal, en local.</p>
+    <p class="sub"><b>Version 0.1</b> · « Mimamori » veut dire « veiller sur ». Une mosaïque de toutes vos caméras, le plein écran en HD avec le son, et la vidéo qui ne quitte jamais votre maison.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/cyprienbrisset/mimamori-public/releases/latest">Télécharger l'APK</a>
+    </div>
+
+    <div class="device" role="img" aria-label="Illustration de la mosaïque : quatre caméras, Salon, Entrée, Chambre et Jardin, la caméra Entrée entourée d'une lueur ambrée">
+      <div class="screen">
+        <div class="bar"><b>Mimamori</b><span class="sp"></span><span class="pill">3 en direct · 1 hors ligne</span><span>21:47</span><span class="pill">Réglages</span></div>
+        <div class="grid">
+          <div class="tile"><span>Salon</span></div>
+          <div class="tile lit"><span>Entrée</span></div>
+          <div class="tile"><span>Chambre</span></div>
+          <div class="tile off"><span>Jardin</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">Illustration de la mosaïque ; les noms des caméras sont des exemples.</p>
+  </header>
+
+  <section>
+    <h2>Pensé pour le Portal</h2>
+    <div class="cards">
+      <div class="card"><h3>Mosaïque</h3><p>Toutes les caméras en flux léger, en 2 × 2 ou 3 × 2, avec leur état. La dernière caméra regardée garde la lueur de la lanterne.</p></div>
+      <div class="card"><h3>Plein écran</h3><p>HD avec le son. Flèches, bandeau ou glissement pour changer de caméra ; les commandes s'effacent après 5 secondes.</p></div>
+      <div class="card"><h3>À portée de doigt</h3><p>Chaque bouton fait au moins 64 points, lisible et visable depuis le canapé.</p></div>
+      <div class="card"><h3>Tout reste chez vous</h3><p>La vidéo va de la caméra au Portal. Internet sert seulement à obtenir la clé de chiffrement auprès de Xiaomi.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Installer</h2>
+    <ol>
+      <li>Sur le Portal, ouvrez <b>FukkaStore</b> dans <a href="https://cyprienbrisset.github.io/fukkatsu-nop/">Fukkatsu</a> (à partir de la 2.7) et installez Mimamori. L'APK est aussi joint à chaque <a href="https://github.com/cyprienbrisset/mimamori-public/releases">release</a>.</li>
+      <li>Ouvrez Mimamori et connectez votre compte Xiaomi (le même que dans Mi Home), en choisissant sa région.</li>
+      <li>Si Xiaomi le demande, recopiez le captcha ou le code reçu par SMS ou e-mail.</li>
+      <li>Choisissez les caméras à afficher : la mosaïque s'ouvre.</li>
+    </ol>
+    <p class="sub">Appareil visé : Meta Portal+ 1re génération. Caméras : Xiaomi Smart Camera C200 ; les autres caméras Xiaomi lues par go2rtc devraient fonctionner.</p>
+  </section>
+
+  <section>
+    <h2>Bientôt</h2>
+    <ul>
+      <li><b>Mimamori pour iPhone</b> : les caméras sur l'iPhone, à la maison, par le Portal.</li>
+      <li><b>Parler</b> : un bouton à maintenir pour parler dans la caméra.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sous le capot</h2>
+    <p class="sub">Mimamori embarque <a href="https://github.com/AlexxIT/go2rtc">go2rtc</a> 1.9.15, compilé pour Android depuis le code officiel. go2rtc parle aux caméras Xiaomi et rediffuse chaque flux sur le Portal lui-même (<code>127.0.0.1</code>), que lit ExoPlayer (HEVC + Opus). Seuls les modules utiles sont chargés : aucun module capable d'exécuter des commandes. Le mot de passe Xiaomi n'est pas conservé, seulement le jeton de connexion.</p>
+  </section>
+
+  <footer>
+    Mimamori © Cyprien Brisset. Composants tiers : go2rtc (MIT), police Zen Maru Gothic (SIL OFL 1.1), AndroidX Media3 (Apache 2.0). Non affilié à Xiaomi ni à Meta.
+  </footer>
+</div>
+</body>
+</html>
